@@ -1,54 +1,117 @@
 import "./Login.scss"
 
 const Login = () => {
+const time_to_show_login = 400;
+const time_to_hidden_login = 200;
+const time_to_show_sign_up = 100;
+const time_to_hidden_sign_up = 400;
 
+const change_to_login =() => {
+document.querySelector('.cont_forms').classNameName = "cont_forms cont_forms_active_login";  
+document.querySelector('.cont_form_login').style.display = "block";
+document.querySelector('.cont_form_sign_up').style.opacity = "0";               
+
+setTimeout(function(){  document.querySelector('.cont_form_login').style.opacity = "1"; },time_to_show_login);  
+  
+setTimeout(function(){    
+document.querySelector('.cont_form_sign_up').style.display = "none";
+},time_to_hidden_login);  
+  }
+
+
+
+const change_to_sign_up =() => {
+  document.querySelector('.cont_forms').classNameName = "cont_forms cont_forms_active_sign_up";
+  document.querySelector('.cont_form_sign_up').style.display = "block";
+document.querySelector('.cont_form_login').style.opacity = "0";
+  
+setTimeout(function(){  document.querySelector('.cont_form_sign_up').style.opacity = "1";
+},time_to_show_sign_up);  
+
+setTimeout(function(){   document.querySelector('.cont_form_login').style.display = "none";
+},time_to_hidden_sign_up);  
+
+
+}    
+
+const time_to_hidden_all = 500;
+
+const hidden_login_and_sign_up =() => {
+
+document.querySelector('.cont_forms').classNameName = "cont_forms";  
+document.querySelector('.cont_form_sign_up').style.opacity = "0";               
+document.querySelector('.cont_form_login').style.opacity = "0"; 
+
+setTimeout(function(){
+document.querySelector('.cont_form_sign_up').style.display = "none";
+document.querySelector('.cont_form_login').style.display = "none";
+},time_to_hidden_all);  
+  
+  }
     return (
-        <div className="limiter">
-		<div className="container-login100">
-			<div className="wrap-login100">
-				<form className="login100-form validate-form">
-					<span className="login100-form-title p-b-26">
-						Welcome
-					</span>
-					<span className="login100-form-title p-b-48">
-						<i className="zmdi zmdi-font"></i>
-					</span>
+<div id="login">
+<div className="cotn_principal">
+<div className="cont_centrar">
 
-					<div className="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input className="input100" type="text" name="email" />
-						<span className="focus-input100" data-placeholder="Email"></span>
-					</div>
+  <div className="cont_login">
+<div className="cont_info_log_sign_up">
+      <div className="col_md_login">
+<div className="cont_ba_opcitiy">
+        
+        <h2>LOGIN</h2>  
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> 
+  <button className="btn_login" onClick={() =>change_to_login()}>LOGIN</button>
+  </div>
+  </div>
+<div className="col_md_sign_up">
+<div className="cont_ba_opcitiy">
+  <h2>SIGN UP</h2>
 
-					<div className="wrap-input100 validate-input" data-validate="Enter password">
-						<span className="btn-show-pass">
-							<i className="zmdi zmdi-eye"></i>
-						</span>
-						<input className="input100" type="password" name="pass" />
-						<span className="focus-input100" data-placeholder="Password"></span>
-					</div>
+  
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-					<div className="container-login100-form-btn">
-						<div className="wrap-login100-form-btn">
-							<div className="login100-form-bgbtn"></div>
-							<button className="login100-form-btn">
-								Login
-							</button>
-						</div>
-					</div>
+  <button className="btn_sign_up" onClick={( )=>change_to_sign_up()}>SIGN UP</button>
+</div>
+  </div>
+       </div>
 
-					<div className="text-center p-t-115">
-						<span className="txt1">
-							Don’t have an account?
-						</span>
+    
+    <div className="cont_back_info">
+       <div className="cont_img_back_grey">
+       <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />
+       </div>
+       
+    </div>
+<div className="cont_forms" >
+    <div className="cont_img_back_">
+       <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />
+       </div>
+ <div className="cont_form_login">
+<a href="#" onClick={() =>hidden_login_and_sign_up()} ><i className="material-icons">&#xE5C4;</i></a>
+   <h2>LOGIN</h2>
+ <input type="text" placeholder="Email" />
+<input type="password" placeholder="Password" />
+<button className="btn_login" onClick={() =>change_to_login()}>LOGIN</button>
+  </div>
+  
+   <div className="cont_form_sign_up">
+<a href="#" onClick={()=> hidden_login_and_sign_up()}><i className="material-icons">&#xE5C4;</i></a>
+     <h2>SIGN UP</h2>
+<input type="text" placeholder="Email" />
+<input type="text" placeholder="User" />
+<input type="password" placeholder="Password" />
+<input type="password" placeholder="Confirm Password" />
+<button className="btn_sign_up"onClick={() =>change_to_sign_up()}>SIGN UP</button>
 
-						<a className="txt2" href="#">
-							Sign Up
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+  </div>
+
+    </div>
+    
+  </div>
+ </div>
+</div>
+</div>
+      
     )
 }
 
