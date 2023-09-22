@@ -1,5 +1,5 @@
 import Home from "../views/Home/Home";
-import Login from "../views/Login/Login";
+import LoginRegister from "../views/LoginRegister/LoginRegister";
 
 const routes = [
   {
@@ -12,7 +12,7 @@ const routes = [
     path: "/login",
     private: true,
     exact: true,
-    component: Login,
+    component: LoginRegister,
   },
 ];
 
