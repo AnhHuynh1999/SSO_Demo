@@ -1,11 +1,15 @@
+import { Outlet } from "react-router-dom";
+import Menu from "./Menu";
+import { Fragment } from "react";
 
-
-const Layout = ({children}) => {
+const Layout = () => {
   return (
-    <div>
-      <h1>Bảo anh</h1>
-      {children}
-    </div>
+    <Fragment>
+      <Menu />
+      <div className="body-text">
+        <Outlet />
+      </div>
+    </Fragment>
   );
 };
 

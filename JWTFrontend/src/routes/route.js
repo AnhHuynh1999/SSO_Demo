@@ -13,7 +13,7 @@ const routes = [
     Component: Home,
   },
   {
-    path: "/users",
+    path: "users",
     private: true,
     exact: true,
     Component: ManageUser,

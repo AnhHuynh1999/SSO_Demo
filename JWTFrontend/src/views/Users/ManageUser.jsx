@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { addUser, deleteUser, getUser, updateUser } from "../../sevices/user";
 import ReactPaginate from "react-paginate";
 import "./ManageUser.scss";
 import CustomModalDelete from "../../components/CustomModalDelete/CustomModalDelete";
 import ModalModify from "./ModalModify";
 import _ from "lodash";
+import userService from "../../sevices/userService";
 
 const ManageUser = () => {
   const [page, setPage] = useState(1);
@@ -19,28 +19,33 @@ const ManageUser = () => {
 
   useEffect(() => {
     getPageUser();
-  }, [page]);
+  }, []);
 
-  const getPageUser = useCallback(async () => {
-    try {
-      let res = await getUser({
-        page: page,
-        limit: limit,
-      });
-      setData(res.DT.users);
-      setTotalPages(res.DT.totalPages);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  }, [page]);
+  const getPageUser = useCallback(
+    async (currentPage) => {
+      try {
+        let res = await userService.getUser({
+          page: currentPage || page,
+          limit: limit,
+        });
+        setData(res.DT.users);
+        setTotalPages(res.DT.totalPages);
+      } catch (error) {
+        toast.error(error.message);
+      }
+    },
+    [page]
+  );
 
   const handlePageClick = (event) => {
-    setPage(event.selected + 1);
+    const currentPage = event.selected + 1;
+    setPage(currentPage);
+    getPageUser(currentPage);
   };
 
   const handleDeleteUser = async () => {
     try {
-      await deleteUser({ id: selectedUser.id });
+      await userService.deleteUser({ id: selectedUser.id });
       getPageUser();
       toast.success("Xoá người dùng thành công");
     } catch (error) {
@@ -56,10 +61,10 @@ const ManageUser = () => {
   const handleModify = async (values) => {
     try {
       if (_.isEmpty(selectUpdateUser)) {
-        await addUser(values);
+        await userService.addUser(values);
         toast.success("Thêm người dùng thành công");
       } else {
-        await updateUser(values);
+        await userService.updateUser(values);
         toast.success("Cập nhật thông tin người dùng thành công");
       }
     } catch (error) {

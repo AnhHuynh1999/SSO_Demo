@@ -3,17 +3,20 @@ import "./LoginRegister.scss";
 import CustomInput from "../../components/CustomInput";
 import { toast } from "react-toastify";
 import { regexEmail, regexPhone } from "../../ulits/contants";
-import { login, register } from "../../sevices/auth";
 import { useNavigate } from "react-router-dom";
+import userAction from "../../actions/userAction";
+import authService from "../../sevices/authService";
+import { useDispatch } from "react-redux";
 
 const LoginRegister = () => {
   const navigate = useNavigate();
   const methodLogin = useForm();
   const methodRegister = useForm();
+  const dispatch = useDispatch();
 
   const onRegister = async (values) => {
     try {
-      await register(values);
+      await authService.register(values);
       toast.success("Đăng ký thành công");
       methodRegister.clearErrors();
       methodRegister.reset({});
@@ -26,14 +29,7 @@ const LoginRegister = () => {
 
   const onLogin = async (values) => {
     try {
-      await login(values);
-      sessionStorage.setItem(
-        "token",
-        JSON.stringify({
-          isAuthenticated: true,
-          token: "baoanh",
-        })
-      );
+      await dispatch(userAction.login(values));
       toast.success("Đăng nhập thành công");
       navigate("/users");
     } catch (error) {

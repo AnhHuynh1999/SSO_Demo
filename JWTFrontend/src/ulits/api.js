@@ -6,16 +6,17 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
+axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+  "token"
+)}`;
 // Add a request interceptor
 api.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
-
+    // Do something before request is sents
     return config;
   },
   function (error) {
     // Do something with request error
-    const status = error.response?.status || 500;
     return Promise.reject(error);
   }
 );
@@ -39,6 +40,7 @@ api.interceptors.response.use(
       // authentication (token related issues)
       case 401: {
         window.location.href = "/login";
+        localStorage.removeItem("token");
         return Promise.reject({ message: "Không có quyền" });
       }
 

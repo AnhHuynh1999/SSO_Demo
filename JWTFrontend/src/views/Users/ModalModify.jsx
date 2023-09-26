@@ -6,8 +6,8 @@ import CustomInput from "../../components/CustomInput";
 import { listSex, regexEmail, regexPhone } from "../../ulits/contants";
 import CustomSelect from "../../components/CustomSelect/CustomSelect";
 import { toast } from "react-toastify";
-import { getGroup } from "../../sevices/group";
 import { customMapSelect } from "../../ulits/helper";
+import groupService from "../../sevices/groupService";
 
 const ModalModify = ({ show, user, handleModify, onClose }) => {
   const methods = useForm();
@@ -26,7 +26,7 @@ const ModalModify = ({ show, user, handleModify, onClose }) => {
 
   const loadGroup = async () => {
     try {
-      const res = await getGroup();
+      const res = await groupService.getGroup();
       setListGroup(res.DT);
     } catch (error) {
       toast.error(error.message);
