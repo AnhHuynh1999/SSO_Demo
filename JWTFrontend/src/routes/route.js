@@ -1,18 +1,31 @@
-import Home from "../views/Home/Home";
-import LoginRegister from "../views/LoginRegister/LoginRegister";
+import React from "react";
 
+const Home = React.lazy(() => import("../views/Home/Home"));
+const LoginRegister = React.lazy(() =>
+  import("../views/LoginRegister/LoginRegister")
+);
+const Page404 = React.lazy(() => import("../views/PageError/Page404/Page404"));
+const ManageUser = React.lazy(() => import("../views/Users/ManageUser"));
 const routes = [
   {
     path: "/",
+    exact: true,
+    Component: Home,
+  },
+  {
+    path: "/users",
     private: true,
     exact: true,
-    component: Home,
+    Component: ManageUser,
   },
   {
     path: "/login",
-    private: true,
     exact: true,
-    component: LoginRegister,
+    Component: LoginRegister,
+  },
+  {
+    path: "*",
+    Component: Page404,
   },
 ];
 

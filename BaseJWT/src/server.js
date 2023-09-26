@@ -34,7 +34,6 @@ configSession(app)
 //test connection db  
 connection();
 
-
 //init web routes
 initWebRoutes(app);
 initApiRoutes(app);

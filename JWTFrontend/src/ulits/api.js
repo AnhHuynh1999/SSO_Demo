@@ -1,29 +1,78 @@
-import axios from 'axios'
+import axios from "axios";
 
-const instance = axios.create({
-    baseURL: import.meta.env.VITE_BACKEND_URL
-  });
+const api = axios.create({
+  withCredentials: true,
+  credentials: "include",
+  baseURL: import.meta.env.VITE_BACKEND_URL,
+});
+
 // Add a request interceptor
-instance.interceptors.request.use(function (config) {
+api.interceptors.request.use(
+  function (config) {
     // Do something before request is sent
+
     return config;
-  }, function (error) {
+  },
+  function (error) {
     // Do something with request error
+    const status = error.response?.status || 500;
     return Promise.reject(error);
-  });
+  }
+);
 
 // Add a response interceptor
-instance.interceptors.response.use(function (response) {
+api.interceptors.response.use(
+  function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    if(response.data && +response.data.EC !== 0){
-        return Promise.reject(response.data.EM);
+    if (response.data && +response.data.EC !== 0) {
+      return Promise.reject({ message: response.data.EM });
     }
     return response.data;
-  }, function (error) {
+  },
+  function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    return Promise.reject(error);
-  });
+    const status = error.response?.status || 500;
+    // we can handle global errors here
+    switch (status) {
+      // authentication (token related issues)
+      case 401: {
+        window.location.href = "/login";
+        return Promise.reject({ message: "Không có quyền" });
+      }
 
-export default instance
+      // forbidden (permission related issues)
+      case 403: {
+        return Promise.reject({ message: error.message });
+      }
+
+      // bad request
+      case 400: {
+        return Promise.reject({ message: error.message });
+      }
+
+      // not found
+      case 404: {
+        return Promise.reject({ message: error.message });
+      }
+
+      // conflict
+      case 409: {
+        return Promise.reject({ message: error.message });
+      }
+
+      // unprocessable
+      case 422: {
+        return Promise.reject({ message: error.message });
+      }
+
+      // generic api error (server related) unexpected
+      default: {
+        return Promise.reject({ message: error.message });
+      }
+    }
+  }
+);
+
+export default api;

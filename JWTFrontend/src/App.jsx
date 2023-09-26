@@ -1,12 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
-import AppRoute from "./routes/AppRoute";
 import "./App.scss";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AppRoute from "./routes/AppRoute";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter >
       <AppRoute />
       <ToastContainer
         position="top-right"
@@ -20,8 +20,6 @@ function App() {
         pauseOnHover
         theme="light"
       />
-      {/* Same as */}
-      <ToastContainer />
     </BrowserRouter>
   );
 }

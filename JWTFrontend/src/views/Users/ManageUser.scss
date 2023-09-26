@@ -1,0 +1,21 @@
+#manage-user {
+  .btn-edit,
+  .btn-plus,
+  .btn-trash {
+    font-size: 20px;
+  }
+  .btn-plus {
+    cursor: pointer;
+    color: green;
+  }
+
+  .btn-trash {
+    cursor: pointer;
+    color: red;
+  }
+
+  .btn-edit {
+    cursor: pointer;
+    color: orange;
+  }
+}
