@@ -130,6 +130,11 @@ const ManageUser = () => {
                   </td>
                 </tr>
               ))}
+            {data?.length === 0 && (
+              <tr>
+                <td colSpan={5}>Không có dữ liệu</td>
+              </tr>
+            )}
           </tbody>
         </table>
         <div className=" text-center ">

@@ -28,7 +28,7 @@ const AppRoute = () => {
       userRedux.isAuthenticated &&
       location.pathname === "/login"
     ) {
-      navigate("/");
+      navigate("/users");
     }
   }, [location, userRedux, token]);
 

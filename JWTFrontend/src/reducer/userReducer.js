@@ -19,7 +19,7 @@ const userSlice = createSlice({
         groupWithRoles: action.payload.groupWithRoles,
       };
     },
-    [userAction.logout]: (state) => {
+    [userAction.logout.fulfilled]: (state) => {
       state.token = "";
       state.isAuthenticated = false;
       state.user = {};

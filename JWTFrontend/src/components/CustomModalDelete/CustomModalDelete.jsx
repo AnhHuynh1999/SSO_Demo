@@ -12,7 +12,7 @@ const CustomModalDelete = ({
     onClose();
   };
   return (
-    <Modal show={show}>
+    <Modal show={show} centered>
       <Modal.Header className="">{titleDelete || "Xóa"}</Modal.Header>
       <Modal.Body className="text-center">
         {contentDelete || "Bạn chắc chắn muốn xóa không"}

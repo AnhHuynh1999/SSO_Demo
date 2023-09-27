@@ -29,7 +29,7 @@ const LoginRegister = () => {
 
   const onLogin = async (values) => {
     try {
-      await dispatch(userAction.login(values));
+      dispatch(userAction.login(values));
       toast.success("Đăng nhập thành công");
       navigate("/users");
     } catch (error) {

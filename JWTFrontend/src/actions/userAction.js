@@ -1,15 +1,23 @@
-import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../sevices/authService";
 import userService from "../sevices/userService";
 
-const login = createAsyncThunk("user/login", async (data) => {
-  const res = await authService.login(data);
-  localStorage.setItem("token", res.DT.access_token);
-  return res.DT;
-});
+const login = createAsyncThunk(
+  "user/login",
+  async (data, { dispatch, fulfillWithValue, rejectWithValue }) => {
+    try {
+      const res = await authService.login(data);
+      localStorage.setItem("token", res.DT.access_token);
+      return fulfillWithValue(res.DT);
+    } catch (error) {
+      throw rejectWithValue(error.message);
+    }
+  }
+);
 
-const logout = createAction("user/logout", () => {
+const logout = createAsyncThunk("user/logout", async () => {
   localStorage.removeItem("token");
+  await authService.logout();
   return {};
 });
 

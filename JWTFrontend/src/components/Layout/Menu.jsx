@@ -29,6 +29,14 @@ const Menu = () => {
               </span>
             </li>
             <li>
+              <span onClick={() => changePage("/role")}>
+                Quản lý nhóm quyền
+              </span>
+            </li>
+            <li>
+              <span onClick={() => changePage("/assign-role")}>Phân quyền</span>
+            </li>
+            <li>
               <span className="desktop-item">{userRedux.user?.username}</span>
               <input type="checkbox" id="showDrop" />
               <label htmlFor="showDrop" className="mobile-item">
