@@ -72,15 +72,19 @@ const AssignRole = () => {
 
   const handleSave = async () => {
     try {
-      let data = [];
+      let result = [];
       assignRole.forEach((x) => {
         if (x.isAssign) {
-          data.push({
+          result.push({
             roleId: x.id,
             groupId: selectGroup,
           });
         }
       });
+      let data = {
+        groupId: selectGroup,
+        groupRoles: result,
+      };
       await roleService.assignRoleToGroup(data);
       toast.success("Cập nhật quyền thành công");
     } catch (error) {
