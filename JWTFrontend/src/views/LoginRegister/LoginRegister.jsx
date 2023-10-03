@@ -146,7 +146,7 @@ const LoginRegister = () => {
                 <i className="fa-solid fa-phone"></i>
                 <CustomInput
                   type="text"
-                  placeholder="Email"
+                  placeholder="Phone"
                   field={"phone"}
                   validate={{
                     required: "Bắt buộc nhập số điện thoại",
