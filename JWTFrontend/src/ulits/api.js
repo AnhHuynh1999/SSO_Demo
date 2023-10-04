@@ -13,6 +13,7 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
 api.interceptors.request.use(
   function (config) {
     // Do something before request is sents
+    
     return config;
   },
   function (error) {
@@ -41,7 +42,7 @@ api.interceptors.response.use(
       case 401: {
         window.location.href = "/login";
         localStorage.removeItem("token");
-        return Promise.reject({ message: "Không có quyền" });
+        return  Promise.reject({ message: "Không có quyền" });
       }
 
       // forbidden (permission related issues)
