@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from "react";
 import ReactPaginate from "react-paginate";
 import roleService from "../../sevices/roleService";
 import { toast } from "react-toastify";
 import CustomModalDelete from "../../components/CustomModalDelete/CustomModalDelete";
 
-const RoleTable = () => {
+const RoleTable = (props, ref) => {
   const [limit, setLimit] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState([]);
@@ -14,6 +14,12 @@ const RoleTable = () => {
   useEffect(() => {
     getPageRole();
   }, []);
+
+  useImperativeHandle(ref, () => ({
+    loadData(){
+      getPageRole()
+    }
+  }))
 
   const getPageRole = useCallback(
     async (currentPage) => {
@@ -127,4 +133,4 @@ const RoleTable = () => {
   );
 };
 
-export default RoleTable;
+export default forwardRef(RoleTable);

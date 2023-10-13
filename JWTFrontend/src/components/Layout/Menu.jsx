@@ -34,6 +34,11 @@ const Menu = () => {
               </span>
             </li>
             <li>
+              <span onClick={() => changePage("/skill")}>
+                Quản lý kỹ năng
+              </span>
+            </li>
+            <li>
               <span onClick={() => changePage("/assign-role")}>Phân quyền</span>
             </li>
             <li>

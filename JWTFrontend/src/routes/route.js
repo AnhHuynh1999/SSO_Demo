@@ -8,6 +8,7 @@ const Page404 = React.lazy(() => import("../views/PageError/Page404/Page404"));
 const ManageUser = React.lazy(() => import("../views/Users/ManageUser"));
 const ManageRole = React.lazy(() => import("../views/Role/ManageRole"));
 const AssignRole = React.lazy(() => import("../views/AssignRole/AssignRole"));
+const ManageSkill = React.lazy(() => import("../views/Skill/ManageSkill"));
 const routes = [
   {
     path: "/",
@@ -36,6 +37,12 @@ const routes = [
     exact: true,
     private: true,
     Component: AssignRole,
+  },
+  {
+    path: "/skill",
+    exact: true,
+    private: true,
+    Component: ManageSkill,
   },
   {
     path: "*",

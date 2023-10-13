@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import userAction from "../../actions/userAction";
 import authService from "../../sevices/authService";
 import { useDispatch } from "react-redux";
+import GoogleLogin from "react-google-login";
 
 const LoginRegister = () => {
   const navigate = useNavigate();
@@ -49,6 +50,10 @@ const LoginRegister = () => {
       container.classList.remove(`sign-up-mode${type || ""}`);
     }
   };
+
+  const handleSuccess = () => {};
+
+  const handleFailure = () => {};
 
   return (
     <div id="login-register">
@@ -198,6 +203,13 @@ const LoginRegister = () => {
                 <a href="#" className="social-icon">
                   <i className="fab fa-google"></i>
                 </a>
+                <GoogleLogin
+                  clientId={`${import.meta.env.VITE_APP_CLIENT_ID}`}
+                  buttonText="Sign in with Google"
+                  onSuccess={handleSuccess}
+                  onFailure={handleFailure}
+                  cookiePolicy="single_host_origin"
+                />
                 <a href="#" className="social-icon">
                   <i className="fab fa-linkedin-in"></i>
                 </a>

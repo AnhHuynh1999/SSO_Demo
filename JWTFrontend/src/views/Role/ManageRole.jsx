@@ -1,5 +1,5 @@
 import "./ManageRole.scss";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ const ManageRole = () => {
     description: "",
     isValiUrl: true,
   };
+  const refTable = useRef()
   const [listChilds, setListChilds] = useState({
     [`child-${uuidv4()}`]: dataChildDefault,
   });
@@ -69,6 +70,7 @@ const ManageRole = () => {
         const res = await roleService.createRoles(data);
         if (res && res.EC === 0) {
           toast.success(res.EM);
+          refTable.current.loadData()
         }
       } else {
         toast.error("Trường URL không được để trống");
@@ -138,7 +140,7 @@ const ManageRole = () => {
               </button>
             </div>
           </div>
-          <RoleTable />
+          <RoleTable ref={refTable} />
         </div>
       </div>
     </div>

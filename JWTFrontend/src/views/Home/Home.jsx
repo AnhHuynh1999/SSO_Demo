@@ -1,7 +1,26 @@
+import { useState } from "react";
 import "./Home.scss";
 import CVFile from "./Huynh-Bao-Anh.pdf";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import skillService from "../../sevices/skillService";
 
 const Home = () => {
+  const [skills, setSkills] = useState([]);
+
+  useEffect(() => {
+    loadSkill();
+  }, []);
+
+  const loadSkill = async () => {
+    try {
+      let res = await skillService.getSkill();
+      setSkills(res.DT);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div id="home">
       <div className="promo-block">
@@ -78,60 +97,22 @@ const Home = () => {
                   other overcome difficulties.
                 </p>
               </div>
-
-              <div className="progress-box">
-                <h5>
-                  JavaSript{" "}
-                  <span className="color-heading pull-right">87%</span>
-                </h5>
-                <div className="progress" style={{ opacity: 1, left: "0px" }}>
-                  <div
-                    className="progress-bar bg-color-base"
-                    role="progressbar"
-                    data-width="87"
-                    style={{ width: "87%" }}
-                  ></div>
+              {skills?.map((skill, index) => (
+                <div key={`skill-${index}`} className="progress-box">
+                  <h5>
+                    {skill.name}{" "}
+                    <span className="color-heading pull-right">{skill.proficiency}%</span>
+                  </h5>
+                  <div className="progress" style={{ opacity: 1, left: "0px" }}>
+                    <div
+                      className="progress-bar bg-color-base"
+                      role="progressbar"
+                      data-width={skill.proficiency}
+                      style={{ width: `${skill.proficiency}%` }}
+                    ></div>
+                  </div>
                 </div>
-              </div>
-              <div className="progress-box">
-                <h5>
-                  NodeJS <span className="color-heading pull-right">80%</span>
-                </h5>
-                <div className="progress" style={{ opacity: 1, left: "0px" }}>
-                  <div
-                    className="progress-bar bg-color-base"
-                    role="progressbar"
-                    data-width="80"
-                    style={{ width: "80%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className="progress-box">
-                <h5>
-                  Next 12 <span className="color-heading pull-right">60%</span>
-                </h5>
-                <div className="progress" style={{ opacity: 1, left: "0px" }}>
-                  <div
-                    className="progress-bar bg-color-base"
-                    role="progressbar"
-                    data-width="60"
-                    style={{ width: "60%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className="progress-box">
-                <h5>
-                  ReactJs <span className="color-heading pull-right">77%</span>
-                </h5>
-                <div className="progress" style={{ opacity: 1, left: "0px" }}>
-                  <div
-                    className="progress-bar bg-color-base"
-                    role="progressbar"
-                    data-width="77"
-                    style={{ width: "77%" }}
-                  ></div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

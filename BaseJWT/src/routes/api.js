@@ -4,6 +4,7 @@ import groupController from "../controller/groupController";
 import { checkUserJWT, checkUserPermission } from "../middleware/JWTAction";
 import roleController from "../controller/roleController";
 import apiController from "../controller/apiController";
+import skillController from "../controller/skillController";
 const router = express.Router();
 
 /**
@@ -28,6 +29,11 @@ const initApiRoutes = (app) => {
   router.post("/user/create", userController.createFunc);
   router.put("/user/update", userController.updateFunc);
   router.delete("/user/delete", userController.deleteFunc);
+  //skill routes
+  router.get("/skill/read", skillController.readFunc);
+  router.post("/skill/create", skillController.createFunc);
+  router.put("/skill/update", skillController.updateFunc);
+  router.delete("/skill/delete", skillController.deleteFunc);
 
   // roles routes
   router.get("/role/read", roleController.readFunc);
